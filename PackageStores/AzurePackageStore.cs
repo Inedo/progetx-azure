@@ -14,6 +14,7 @@ namespace Inedo.ProGet.Extensions.Azure.PackageStores
 {
     [DisplayName("Microsoft Azure")]
     [Description("A package store backed by Microsoft Azure Blob Store.")]
+    [PersistFrom("Inedo.ProGet.Extensions.PackageStores.Azure.AzurePackageStore,ProGetCoreEx")]
     public sealed partial class AzurePackageStore : CommonIndexedPackageStore
     {
         private Lazy<CloudStorageAccount> cloudStorageAccount;
