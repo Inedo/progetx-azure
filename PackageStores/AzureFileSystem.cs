@@ -62,7 +62,7 @@ namespace Inedo.ProGet.Extensions.Azure.PackageStores
         public async override Task<Stream> OpenFileAsync(string fileName, FileMode mode, FileAccess access, FileShare share, bool requireRandomAccess)
         {
             var path = this.BuildPath(fileName);
-            var blob = await this.Container.GetBlobReferenceFromServerAsync(path).ConfigureAwait(false);
+            var blob = this.Container.GetBlobReference(path);
 
             if (mode == FileMode.Open && access == FileAccess.Read && !requireRandomAccess)
             {
