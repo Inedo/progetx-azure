@@ -62,7 +62,7 @@ namespace Inedo.ProGet.Extensions.Azure.PackageStores
         public async override Task<Stream> OpenFileAsync(string fileName, FileMode mode, FileAccess access, FileShare share, bool requireRandomAccess)
         {
             var path = this.BuildPath(fileName);
-            var blob = await this.Container.GetBlobReferenceFromServerAsync(path).ConfigureAwait(false);
+            var blob = this.Container.GetBlobReference(path);
 
             if (mode == FileMode.Open && access == FileAccess.Read && !requireRandomAccess)
             {
@@ -91,12 +91,12 @@ namespace Inedo.ProGet.Extensions.Azure.PackageStores
                     seekToEnd = false;
                     break;
                 case FileMode.Open:
-                    wantExisting = false;
-                    loadExisting = false;
+                    wantExisting = true;
+                    loadExisting = true;
                     seekToEnd = false;
                     break;
                 case FileMode.OpenOrCreate:
-                    wantExisting = false;
+                    wantExisting = null;
                     loadExisting = true;
                     seekToEnd = false;
                     break;
